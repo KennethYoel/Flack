@@ -26,6 +26,7 @@
       type="text/javascript"
       src="{{ url_for('static', filename='full-duplex.js') }}"
     ></script>
+    <!-- Websocket JS -->
     <script
       type="text/javascript"
       src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"
@@ -33,54 +34,66 @@
     <title>Flack</title>
   </head>
   <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Narkissos</a>
-      <input
-        class="form-control form-control-dark w-100"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
-        </li>
-      </ul>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"
+    >
+      <a class="navbar-brand ml-3 bg-dark" href="#">Nárkissos</a>
+      <button
+        class="navbar-toggler p-0 mr-3 border-0"
+        type="button"
+        data-toggle="offcanvas"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse offcanvas-collapse">
+        <input
+          class="form-control form-control-dark mx-lg-auto w-50"
+          type="text"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+          </li>
+        </ul>
+      </div>
     </nav>
-    <!-- SideNav -->
     <div class="container-fluid">
       <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <!-- SideNav -->
+        <nav class="col-md-1 d-none d-md-block sidebar top-sidebar">
           <div class="sidebar-sticky">
-            <div class="d-flex flex-row">
-              <ul class="nav flex-column mr-2">
-                <li class="nav-item">
-                  <a class="nav-link text-center" href="#"
-                    ><span
-                      data-feather="voicemail"
-                      class="d-block mx-auto"
-                    ></span
-                    >DM</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-center" href="#"
-                    ><span
-                      data-feather="message-circle"
-                      class="d-block mx-auto"
-                    ></span
-                    >Chat</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-center" href="#"
-                    ><span data-feather="tv" class="d-block mx-auto"></span
-                    >Channel</a
-                  >
-                </li>
-              </ul>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link text-center text-white" href="#"
+                  ><span data-feather="voicemail" class="d-block mx-auto"></span
+                  >DM</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-center text-white" href="#"
+                  ><span
+                    data-feather="message-circle"
+                    class="d-block mx-auto"
+                  ></span
+                  >Chat</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-center text-white" href="#"
+                  ><span data-feather="tv" class="d-block mx-auto"></span
+                  >Channel</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <nav class="col-md-2 d-none d-md-block sidebar bottom-sidebar">
+          <div class="sidebar-sticky">
+            <div class="d-flex justify-content-center">
               <ul class="nav flex-column">
-                <li class="nav-item">Channel</li>
+                <li class="nav-item">Channel List</li>
               </ul>
             </div>
           </div>
@@ -88,6 +101,34 @@
       </div>
       {% block content %}{% endblock %}
     </div>
+    <nav
+      class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark d-md-none"
+    >
+      <div class="d-flex flex-row">
+        <ul class="nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link text-center text-white" href="#"
+              ><span data-feather="voicemail" class="d-block mx-auto"></span
+              >DM</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-center text-white" href="#"
+              ><span
+                data-feather="message-circle"
+                class="d-block mx-auto"
+              ></span
+              >Chat</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-center text-white" href="#"
+              ><span data-feather="tv" class="d-block mx-auto"></span>Channel</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -110,6 +151,11 @@
     <script
       type="text/javascript"
       src="{{ url_for('static', filename='feather.js') }}"
+    ></script>
+    <!-- OffCanvas JS -->
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='offcanvas.js') }}"
     ></script>
   </body>
 </html>
