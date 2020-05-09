@@ -1,36 +1,40 @@
 {% extends "layout.html" %} {% block content %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-11 px-5">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div class="row">
     <div class="col-md-9">
       <h1 class="h3">Channel Name</h1>
-      <div class="chat-container">
-        <img src="/w3images/bandmember.jpg" alt="Avatar" />
-        <p>What is the average review for a book with isbn ...?</p>
-        <form id="form">
-          <input
-            id="isbn"
-            autocomplete="off"
-            autofocus
-            placeholder="ISBNs"
-            type="text"
-          />
-          <input type="submit" value="Get Average Review" />
-        </form>
-        <p id="result"></p>
-        <span class="time-right">11:00</span>
+      <div class="chat-container d-flex flex-row">
+        <div>
+          <img src="/w3images/bandmember.jpg" alt="Avatar" />
+          <p>What is the average review for a book with isbn ...?</p>
+          <form id="form">
+            <input
+              id="isbn"
+              autocomplete="off"
+              autofocus
+              placeholder="ISBNs"
+              type="text"
+            />
+            <input type="submit" value="Get Average Review" />
+          </form>
+          <p id="result"></p>
+          <span class="time-right">11:00</span>
+        </div>
       </div>
 
-      <div class="chat-container darker">
-        <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="right" />
-        <!-- <ul id="votes"></ul> -->
-        <div>Yes Votes: <span id="yes">{{ votes["yes"] }}</span></div>
-        <div>No Votes: <span id="no">{{ votes["no"] }}</span></div>
-        <div>Maybe Votes: <span id="maybe">{{ votes["maybe"] }}</span></div>
-        <hr />
-        <button data-vote="yes">Yes</button>
-        <button data-vote="no">No</button>
-        <button data-vote="maybe">Maybe</button>
-        <span class="time-left">11:01</span>
+      <div class="chat-container darker d-flex flex-row-reverse">
+        <div>
+          <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="right" />
+          <!-- <ul id="votes"></ul> -->
+          <div>Yes Votes: <span id="yes">{{ votes["yes"] }}</span></div>
+          <div>No Votes: <span id="no">{{ votes["no"] }}</span></div>
+          <div>Maybe Votes: <span id="maybe">{{ votes["maybe"] }}</span></div>
+          <hr />
+          <button data-vote="yes">Yes</button>
+          <button data-vote="no">No</button>
+          <button data-vote="maybe">Maybe</button>
+          <span class="time-left">11:01</span>
+        </div>
       </div>
 
       <div class="chat-container">
