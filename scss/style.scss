@@ -67,9 +67,12 @@ body {
   text-transform: uppercase;
 }
 
+.bg-dark-orange {
+  background-color: #da532c !important;
+}
+
 .top-sidebar {
   width: 5rem !important;
-  background-color: #da532c !important;
 }
 
 .bottom-sidebar {
@@ -81,7 +84,7 @@ body {
  */
 
 [role='main'] {
-  padding-top: 133px; /* Space for fixed navbar */
+  padding-top: 48px; /* Space for fixed navbar */
 }
 
 @media (min-width: 768px) {

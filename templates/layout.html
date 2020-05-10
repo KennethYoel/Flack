@@ -34,6 +34,55 @@
     <title>Flack</title>
   </head>
   <body>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="myModal"
+      data-backdrop="static"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="registerDisplayName"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registerDisplayName">
+              Type In Display Name
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label"
+                  >Display Name:</label
+                >
+                <input type="text" class="form-control" id="recipient-name" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Submit Name</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- TopNav -->
     <nav
       class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"
     >
@@ -54,7 +103,9 @@
         />
         <ul class="navbar-nav px-3">
           <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
+            <a class="nav-link" href="#"
+              ><span data-feather="user-check" class="text-white"></span
+            ></a>
           </li>
         </ul>
       </div>
@@ -62,7 +113,9 @@
     <div class="container-fluid">
       <div class="row">
         <!-- SideNav -->
-        <nav class="col-md-1 d-none d-md-block sidebar top-sidebar">
+        <nav
+          class="col-md-1 d-none d-md-block sidebar bg-dark-orange top-sidebar"
+        >
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
@@ -89,12 +142,15 @@
             </ul>
           </div>
         </nav>
-        <nav class="col-md-2 d-none d-md-block sidebar bottom-sidebar">
+        <nav class="col-md-2 d-none d-md-block sidebar bottom-sidebar pl-5">
           <div class="sidebar-sticky">
             <div class="d-flex justify-content-center">
-              <ul class="nav flex-column">
-                <li class="nav-item">Channel List</li>
-              </ul>
+              <div class="flex-column">
+                <h5>Channel List</h5>
+                <ul class="nav">
+                  <li class="nav-item">Channel List</li>
+                </ul>
+              </div>
             </div>
           </div>
         </nav>
@@ -102,32 +158,26 @@
       {% block content %}{% endblock %}
     </div>
     <nav
-      class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark d-md-none"
+      class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark-orange d-md-none p-0"
     >
-      <div class="d-flex flex-row">
-        <ul class="nav mx-auto">
-          <li class="nav-item">
-            <a class="nav-link text-center text-white" href="#"
-              ><span data-feather="voicemail" class="d-block mx-auto"></span
-              >DM</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-center text-white" href="#"
-              ><span
-                data-feather="message-circle"
-                class="d-block mx-auto"
-              ></span
-              >Chat</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-center text-white" href="#"
-              ><span data-feather="tv" class="d-block mx-auto"></span>Channel</a
-            >
-          </li>
-        </ul>
-      </div>
+      <ul class="nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link text-center text-white" href="#"
+            ><span data-feather="voicemail" class="d-block mx-auto"></span>DM</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-center text-white" href="#"
+            ><span data-feather="message-circle" class="d-block mx-auto"></span
+            >Chat</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-center text-white" href="#"
+            ><span data-feather="tv" class="d-block mx-auto"></span>Channel</a
+          >
+        </li>
+      </ul>
     </nav>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script
@@ -151,6 +201,11 @@
     <script
       type="text/javascript"
       src="{{ url_for('static', filename='feather.js') }}"
+    ></script>
+    <!-- Modal JS -->
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='modal.js') }}"
     ></script>
     <!-- OffCanvas JS -->
     <script
