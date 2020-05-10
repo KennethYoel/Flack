@@ -4,8 +4,9 @@
     <div class="col-md-9">
       <h1 class="h3">Channel Name</h1>
       <div class="chat-container d-flex flex-row">
+        <img src="/w3images/bandmember.jpg" alt="Avatar" />
         <div>
-          <img src="/w3images/bandmember.jpg" alt="Avatar" />
+          <p>Name of User <span class="time-right">11:00</span></p>
           <p>What is the average review for a book with isbn ...?</p>
           <form id="form">
             <input
@@ -18,7 +19,6 @@
             <input type="submit" value="Get Average Review" />
           </form>
           <p id="result"></p>
-          <span class="time-right">11:00</span>
         </div>
       </div>
 
@@ -49,6 +49,19 @@
         <span class="time-left">11:05</span>
       </div>
     </div>
+  </div>
+  <form id="form">
+    <input
+      id="chat"
+      class="form-control form-control-dark w-50"
+      autocomplete="off"
+      autofocus
+      placeholder="Type a new message."
+      type="text"
+    />
+  </form>
+  <div class="d-flex flex-row-reverse w-50 pb-3">
+    <input type="submit" value="Send" />
   </div>
   <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
 </main>
