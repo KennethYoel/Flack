@@ -4,6 +4,7 @@
 
 body {
   font-size: 0.875rem;
+  background-color: #ecf0f1; // w3-flat-clouds
   overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
 
@@ -30,7 +31,7 @@ body {
 .sidebar-sticky {
   position: relative;
   top: 0;
-  height: calc(100vh - 48px);
+  height: calc(100vh - 52px);
   padding-top: 0.5rem;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
@@ -67,8 +68,8 @@ body {
   text-transform: uppercase;
 }
 
-.bg-dark-orange {
-  background-color: #da532c !important;
+.bg-flat-alizarin {
+  background-color: #e74c3c !important;
 }
 
 .top-sidebar {
@@ -77,23 +78,26 @@ body {
 
 .bottom-sidebar {
   z-index: 1;
+  background-color: white;
 }
 
 /*
  * Content
  */
 
-.bg-main {
-  background-color: #dedede;
-}
-
 [role='main'] {
-  padding-top: 48px; /* Space for fixed navbar */
+  padding-top: 52px; /* Space for top fixed navbar */
+  padding-bottom: 93px; /* Space for bottom fixed navbar */
 }
 
 @media (min-width: 768px) {
   [role='main'] {
-    padding-top: 48px; /* Space for fixed navbar */
+    padding-top: 52px; /* Space for top fixed navbar */
+    padding-bottom: 12px; /* Space for bottom fixed navbar */
+  }
+
+  .form-width {
+    width: 75%;
   }
 }
 
@@ -134,11 +138,17 @@ body {
   padding: 10px;
   margin: 10px 0;
 }
+@media (min-width: 768px) {
+  .container-width {
+    width: fit-content; // Having background collapsing around the items
+  }
+}
 
 /* Darker chat container */
 .darker {
   border: none;
-  background-color: #ddd;
+  color: white;
+  background-color: #95a5a6; // w3-flat-concrete
 }
 
 /* Clear floats */
@@ -173,7 +183,7 @@ body {
 /* Style time text */
 .time-left {
   //float: left;
-  color: #999;
+  color: white;
 }
 
 /* OffCanvas */

@@ -77,7 +77,9 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Submit Name</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">
+              Submit Name
+            </button>
           </div>
         </div>
       </div>
@@ -86,7 +88,7 @@
     <nav
       class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"
     >
-      <a class="navbar-brand ml-3 bg-dark" href="#">Nárkissos</a>
+      <a class="navbar-brand ml-3 pr-3 bg-dark" href="#">Nárkissos</a>
       <button
         class="navbar-toggler p-0 mr-3 border-0"
         type="button"
@@ -114,7 +116,7 @@
       <div class="row">
         <!-- SideNav -->
         <nav
-          class="col-md-1 d-none d-md-block sidebar bg-dark-orange top-sidebar"
+          class="col-md-1 d-none d-md-block sidebar bg-flat-alizarin top-sidebar"
         >
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
@@ -159,8 +161,9 @@
       </div>
       {% block content %}{% endblock %}
     </div>
+    <!-- Botttom Fixed Mobile Nav-->
     <nav
-      class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark-orange d-md-none p-0"
+      class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-flat-alizarin d-md-none p-0"
     >
       <ul class="nav mx-auto">
         <li class="nav-item">
