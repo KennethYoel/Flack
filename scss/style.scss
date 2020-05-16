@@ -136,13 +136,13 @@ body {
   border-color: #dedede;
   border-radius: 15px 50px 30px;
   background-color: white;
-  border-radius: 15px;
   padding: 10px;
   margin: 10px 0;
 }
 @media (min-width: 768px) {
   .container-width {
     width: fit-content; // Having background collapsing around the items
+    padding: 15px;
   }
 }
 
@@ -161,19 +161,22 @@ body {
 }
 
 /* Style images */
-.chat-container img {
+.chat-img {
   float: left;
-  max-width: 60px;
-  width: 100%;
+  width: 64px;
+  height: 64px;
   margin-right: 20px;
   border-radius: 50%;
 }
 
 /* Style the right image */
-.chat-container img.right {
+.chat-img-right {
   float: right;
+  width: 64px;
+  height: 64px;
   margin-left: 20px;
   margin-right: 0;
+  border-radius: 50%;
 }
 
 /* Style time text */
