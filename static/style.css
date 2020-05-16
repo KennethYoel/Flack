@@ -134,7 +134,9 @@ body {
 
 /* Chat containers */
 .chat-container {
-  border: 2px solid #dedede;
+  border-style: solid;
+  border-color: #dedede;
+  border-radius: 15px 50px 30px;
   background-color: white;
   border-radius: 15px;
   padding: 10px;
