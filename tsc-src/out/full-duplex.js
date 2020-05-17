@@ -4,24 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // When connected, configure buttons
     socket.on('connect', () => {
         // Each button should emit a "submit vote" event
-        document.querySelectorAll('button').forEach((button) => {
-            button.onclick = () => {
-                const selection = button.dataset.vote;
-                socket.emit('submit vote', { selection: selection });
-            };
-        });
+        const selection = document.querySelector('#user-input').value;
+        socket.emit('submit message', { selection: selection });
     });
-    // When a new vote is announced, the vote tallies is allocated to the span element.
-    socket.on('vote totals', (data) => {
-        document.querySelector('#yes').innerHTML = data.yes;
-        document.querySelector('#no').innerHTML = data.no;
-        document.querySelector('#maybe').innerHTML = data.maybe;
+    // When a new message is submitted, the message is showned in the paragraph element.
+    // socket.on('chats', (data) => {
+    //   document.querySelector('#yes').innerHTML = data.yes;
+    //   document.querySelector('#no').innerHTML = data.no;
+    //   document.querySelector('#maybe').innerHTML = data.maybe;
+    // });
+    // When a new message is posted add to the paragraph element.
+    socket.on('messages', (data) => {
+        document.querySelector('#postedMessage').innerHTML = `Message recorded: ${data.selection}`;
     });
-    //   // When a new vote is announced add to the unordered list
-    //   socket.on('announce vote', (data) => {
-    //     const li = document.createElement('li');
-    //     li.innerHTML = `Vote recorded: ${data.selection}`;
-    //     document.querySelector('#votes').append(li);
-    //   });
 });
 //# sourceMappingURL=full-duplex.js.map

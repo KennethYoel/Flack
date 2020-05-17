@@ -1,32 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('form').onsubmit = () => {
-    // Initialize new request
-    const request = new XMLHttpRequest();
-    const isbn = document.querySelector('#isbn').value;
-    request.open('POST', '/book_review');
-    console.log(request);
+  document.querySelector('#form').onsubmit = () => {
+    // Connect to websocket.
+    var socket = io.connect(
+      location.protocol + '//' + document.domain + ':' + location.port
+    );
 
-    // Callback function for when request completes
-    request.onload = () => {
-      // Extract JSON data from request
-      const data = JSON.parse(request.responseText);
+    // When connected, configure buttons
+    socket.on('connect', () => {
+      // When user click submit, it should emit a "submit message" event.
+      const userInput = document.querySelector('#user-input').value;
+      socket.emit('submit message', {'userInput': userInput });
+    });
 
-      // Update the result paragraph
-      if (data.success) {
-        const contents = `The average review is ${data.rate_average} for ${isbn}.`;
-        document.querySelector('#result').innerHTML = contents;
-      } else {
-        document.querySelector('#result').innerHTML = 'There was an error.';
-      }
-    };
+    // When a new message is submitted, the message is showned in the paragraph element.
+    // socket.on('chats', (data) => {
+    //   document.querySelector('#yes').innerHTML = data.yes;
+    //   document.querySelector('#no').innerHTML = data.no;
+    //   document.querySelector('#maybe').innerHTML = data.maybe;
+    // });
 
-    // Add data to send with request
-    const data = new FormData();
-    data.append('isbn', isbn);
-
-    // Send request
-    request.send(data);
-    // Stops the page from reloading.
+    // When a new message is posted add to the paragraph element.
+    socket.on('chats', (data) => {
+      document.querySelector('#postedMessage').innerHTML = data.userInput;
+    });
     return false;
   };
 });
