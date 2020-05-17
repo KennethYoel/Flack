@@ -81,6 +81,13 @@ body {
   background-color: white;
 }
 
+.channel-button {
+  margin-top: calc(100vh - 210px);
+  button {
+    margin-left: 3vw;
+  }
+}
+
 /*
  * Content
  */
@@ -149,6 +156,7 @@ body {
 /* Darker chat container */
 .darker {
   border: none;
+  border-radius: 50px 15px 30px;
   color: white;
   background-color: #95a5a6; // w3-flat-concrete
 }

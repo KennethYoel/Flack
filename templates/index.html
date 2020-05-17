@@ -1,42 +1,44 @@
 {% extends "layout.html" %} {% block content %}
 <!-- Secondary SideNav -->
-<nav
-class="col-md-3 ml-md-5 pl-5 d-none d-md-block sidebar bottom-sidebar"
->
-<div class="sidebar-sticky">
-  <div class="d-flex">
-    <div class="flex-column">
-      <h5>Chat</h5>
-      <ul class="list-unstyled pt-2">
-        <li class="media">
-          <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px; border-radius: 50%;">
-          <div class="media-body">
-            <p class="my-0">Chatter</p>
-            <p class="mb-0">Cras sit amet nibh libero.</p>
-          </div>
-        </li>
-      </ul>
+<nav class="col-md-3 ml-md-5 pl-5 d-none d-md-block sidebar bottom-sidebar">
+  <!-- <div class="sidebar-sticky">
+    <div class="d-flex">
+      <div class="flex-column">
+        <h5>Chat</h5>
+        <ul class="list-unstyled pt-2">
+          <li class="media">
+            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px; border-radius: 50%;">
+            <div class="media-body">
+              <p class="my-0">Chatter</p>
+              <p class="mb-0">Cras sit amet nibh libero.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</div>
+  </div> -->
 
-<!-- <div class="sidebar-sticky">
-  <div class="d-flex">
-    <div class="flex-column">
+  <div class="sidebar-sticky">
+    <div class="d-flex flex-column">
       <h5>Channel List</h5>
-      <ul class="list-unstyled pt-2">
-        <li class="media">
-          <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px">
-          <div class="media-body">
-            <h5 class="mt-0 mb-1">Name of Channel</h5>
-          </div>
-        </li>
-      </ul>
+      <div>
+        <ul class="list-unstyled pt-2">
+          <li class="media">
+            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px">
+            <div class="media-body">
+              <h5 class="mt-0 mb-1">Name of Channel</h5>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="channel-button">
+        <button type="button" class="btn border-top" data-toggle="takesMeToCreateChannelPage" data-target="#takesMeToCreateChannelPage">
+          <span data-feather="tv" class="mb-1"></span> Join or Create Channel
+        </button>
+      </div>
     </div>
   </div>
-</div> -->
 </nav>
-</div>
 <!-- Main Content -->
 <main role="main" class="col-md-9 ml-md-auto col-lg-9 px-4">
   <div class="row">
@@ -59,15 +61,52 @@ class="col-md-3 ml-md-5 pl-5 d-none d-md-block sidebar bottom-sidebar"
                 <span data-feather="users"></span><span data-feather="users"></span><span data-feather="users"></span>
               </div>
               <div class="d-flex justify-content-center pt-2 border-top">
-                <input type="submit" value="Create Channel" />
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCenter">
+                  <span data-feather="tv" class="mb-1"></span> Create Channel
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalCenterTitle">Create Your Team</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Name</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                          </div>
+                          <div class="form-group">
+                            <label for="message-text" class="col-form-label">Description (optional)</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Privacy</label>
+                            <input type="text" class="form-control" id="recipient-name" value="Public - Anyone can add members.">
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Create Channel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- Channels Created -->
         <div class="col mb-4">
           <div class="card">
             <div class="d-flex justify-content-center align-items-center pt-3">
-              <h2><span class="badge badge-secondary">NW</span></h2>
+              <h2><span class="badge badge-secondary">NT</span></h2>
             </div>
             <div class="card-body">
               <h5 class="card-title text-center mb-0">Name of Team</h5>
@@ -78,9 +117,15 @@ class="col-md-3 ml-md-5 pl-5 d-none d-md-block sidebar bottom-sidebar"
               <div class="d-flex justify-content-center pt-2 border-top">
                 <p class="card-text text-center">Description of the team created.</p>
               </div>
+              <div class="d-flex justify-content-center pt-2">
+                <button type="button" class="btn btn-primary">
+                  <span data-feather="user-plus" class="mb-1"></span> Join Channel
+                </button>
+              </div>
             </div>
           </div>
         </div>
+
         <div class="col mb-4">
           <div class="card">
             <img src="..." class="card-img-top" alt="...">
