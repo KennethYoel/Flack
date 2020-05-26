@@ -2,26 +2,55 @@ import os
 import requests
 import time
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, session, render_template, request, jsonify
+from flask_session import (
+    Session,
+)  # an additional extension to sessions which allows them to be stored server-side
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config["SECRET_KEY"] = os.urandom(16)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 socketio = SocketIO(app)
 
 channelName = ["Channel 1", "Channel 2", "Channel 3"]
+usersMsgs = {}
+userName = ""
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html")
+    """Register in users name."""
+    # Forget any user_id
+    session.clear()
+
+    if session.get("userName") is None:
+        session["userName"]  = ""
+
+    if request.method == "POST":
+        session["userName"] = request.form.get("username")
+        userName = session["userName"] 
+        print(userName)
+        # Should I just have Session for username, since I want the cookies bowser to know who is the user is.
+    
+    return render_template("index.html", name=session["userName"])
 
 
-@socketio.on("submit message")
-def message(data):
-    userInput = data["userInput"]
-    emit("chats", {'userInput': userInput}, broadcast=True)
-    # emit("announce vote", {"selection": selection}, broadcast=True)
+@app.route("/username")
+def username():
+    return userName
+
+
+@socketio.on("submit chat")
+def loveLetter(json):
+    # some JSON:
+    name = json['username']
+    usersMsgs[name] = json['chats']
+    print("received my event: " + str(usersMsgs))  # so create a session[json["username"]] = json["chats"]
+    # some emitting
+    emit("message all", json, broadcast=True)
 
 
 @app.route("/first")
@@ -31,7 +60,7 @@ def first():
 
 @app.route("/second")
 def second():
-    return channelName[1]    
+    return channelName[1]
 
 
 @app.route("/third")
@@ -55,3 +84,7 @@ def posts():
 
         # Return list of posts.
         return jsonify(data)
+
+
+if __name__ == "__main__":
+    socketio.run(app, debug=True)

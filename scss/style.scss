@@ -15,6 +15,15 @@ body {
 }
 
 /*
+  * Main Modal Screen
+  */
+
+.modal-backdrop {
+  background-image: linear-gradient(to bottom right, red,orange,yellow,green,blue,indigo,violet) !important; // Change the background of the modal
+  opacity: 0.8 !important;
+}
+
+/*
  * Sidebar
  */
 

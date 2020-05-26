@@ -1,4 +1,12 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %} 
+
+{% block head %} 
+    {{ super() }}
+    <!-- Request/Response & Full Duplex JSCode -->
+    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+{% endblock %}
+
+{% block content %}
 <!-- Secondary SideNav -->
 <nav class="col-md-3 ml-md-5 pl-5 d-none d-md-block sidebar bottom-sidebar">
   <!-- <div class="sidebar-sticky">
@@ -161,18 +169,15 @@
       <!-- Messenger Content -->
       <div class="d-flex flex-row">
         <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
-        <div class="chat-container container-width">
+        <div id="chat-received" class="chat-container container-width">
           <p>Name of User <span class="time-right"> 11:00</span></p>
-          <p id="postedMessage"></p>
         </div>
       </div>
 
       <div class="d-flex flex-row-reverse">
         <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
-        <div class="chat-container darker container-width">
-          <p>Name of User <span class="time-left">11:01</span></p>
-          <!-- <ul id="votes"></ul> -->
-          <p>What is the average review for a book with isbn ...?</p>
+        <div id="chat-sent" class="chat-container darker container-width">
+          <p>{{ name }} <span class="time-left">11:01</span></p>
         </div>
       </div>
 
@@ -193,17 +198,10 @@
       </div>
     </div>
   </div>
-  <form id="form">
-    <input
-      id="user-input"
-      class="form-control form-control-dark mb-2 ml-md-5 form-width"
-      autocomplete="off"
-      autofocus
-      placeholder="Type a new message."
-      type="text"
-    />
+  <form id="messenger_form">
+    <input id="user_input" class="form-control form-control-dark mb-2 ml-md-5 form-width" type="text" autocomplete="off" autofocus >
     <div class="d-flex flex-row-reverse pb-3 ml-md-5 form-width">
-      <input type="submit" value="Send" />
+      <button id="submit_msg" data-user="{{ name }}">Send</button>
     </div>
   </form>
   <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->

@@ -16,6 +16,14 @@ body {
 }
 
 /*
+  * Main Modal Screen
+  */
+.modal-backdrop {
+  background-image: linear-gradient(to bottom right, red, orange, yellow, green, blue, indigo, violet) !important;
+  opacity: 0.8 !important;
+}
+
+/*
  * Sidebar
  */
 .sidebar {

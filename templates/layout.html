@@ -65,26 +65,17 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="username_form" action="{{ url_for('index') }}" method="post">
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label"
                   >Display Name:</label
                 >
-                <input type="text" class="form-control" id="recipient-name" />
+                <input id="recipient-name" type="text" name="username" placeholder="Enter Your Pseudo Name" class="form-control" />
               </div>
+              <button type="submit" class="btn btn-primary float-right" data-hide="modal">
+                Submit Name
+              </button>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">
-              Submit Name
-            </button>
           </div>
         </div>
       </div>
@@ -112,7 +103,7 @@
           <li class="nav-item text-nowrap">
             <a class="nav-link" href="#"
               ><span data-feather="user-check" class="text-white"></span
-            ></a>
+            ><p id="user-input">{{ nameOfUser }}</p></a>
           </li>
         </ul>
       </div>
@@ -153,7 +144,7 @@
     </div>
     <!-- Botttom Fixed Mobile Nav-->
     <nav
-      class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-flat-alizarin d-md-none p-0"
+      class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-flat-metro-dark-red d-md-none p-0"
     >
       <ul class="nav mx-auto">
         <li class="nav-item">
@@ -201,6 +192,11 @@
     <script
       type="text/javascript"
       src="{{ url_for('static', filename='modal.js') }}"
+    ></script>
+    <!-- Modal Form Input JS -->
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='modal-form.js') }}"
     ></script>
     <!-- OffCanvas JS -->
     <script
