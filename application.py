@@ -2,7 +2,7 @@ import os
 import requests
 import time
 
-from flask import Flask, session, render_template, request, jsonify
+from flask import Flask, session, render_template, request, jsonify, redirect, url_for
 from flask_session import (
     Session,
 )  # an additional extension to sessions which allows them to be stored server-side
@@ -16,41 +16,47 @@ Session(app)
 socketio = SocketIO(app)
 
 channelName = ["Channel 1", "Channel 2", "Channel 3"]
-usersMsgs = {}
+usersMessages = {}
 userName = ""
+count = 0
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    """Single page app"""
+    return render_template("index.html", name=userName)
+
+
+@socketio.on("submit chat")
+def loveLetter(json):
+    global usersMessages, count
+    # some JSON:
+    session["userName"] = json['usersname']
+
+    if bool(json) == True:
+        usersMessages['usersMessages' + str(count)] = {'name': session["userName"], 'timestamp':  json['timestamp'], 'messages': json['chats']} # create a foor loop to create nested Dict {}
+        count = count + 1
+        
+    print("received my event: " + str(usersMessages))  # so create a session[json["username"]] = json["chats"]
+    # some emitting
+    emit("message all", json, broadcast=True)
+
+
+@app.route("/signUp", methods=["GET", "POST"])
+def signUp():
+    global userName
+    
     """Register in users name."""
     # Forget any user_id
     session.clear()
-
-    if session.get("userName") is None:
-        session["userName"]  = ""
 
     if request.method == "POST":
         session["userName"] = request.form.get("username")
         userName = session["userName"] 
         print(userName)
-        # Should I just have Session for username, since I want the cookies bowser to know who is the user is.
-    
-    return render_template("index.html", name=session["userName"])
-
-
-@app.route("/username")
-def username():
-    return userName
-
-
-@socketio.on("submit chat")
-def loveLetter(json):
-    # some JSON:
-    name = json['username']
-    usersMsgs[name] = json['chats']
-    print("received my event: " + str(usersMsgs))  # so create a session[json["username"]] = json["chats"]
-    # some emitting
-    emit("message all", json, broadcast=True)
+        return redirect(url_for('index'))
+    else:
+        return userName
 
 
 @app.route("/first")
