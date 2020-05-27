@@ -17,46 +17,32 @@ socketio = SocketIO(app)
 
 channelName = ["Channel 1", "Channel 2", "Channel 3"]
 usersMessages = {}
-userName = ""
 count = 0
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     """Single page app"""
-    return render_template("index.html", name=userName)
+    return render_template("index.html", messageList=usersMessages)
 
 
 @socketio.on("submit chat")
 def loveLetter(json):
     global usersMessages, count
+
+    # Forget any user_id
+    session.clear()
+
     # some JSON:
     session["userName"] = json['usersname']
 
     if bool(json) == True:
         usersMessages['usersMessages' + str(count)] = {'name': session["userName"], 'timestamp':  json['timestamp'], 'messages': json['chats']} # create a foor loop to create nested Dict {}
         count = count + 1
-        
+
     print("received my event: " + str(usersMessages))  # so create a session[json["username"]] = json["chats"]
     # some emitting
     emit("message all", json, broadcast=True)
-
-
-@app.route("/signUp", methods=["GET", "POST"])
-def signUp():
-    global userName
-    
-    """Register in users name."""
-    # Forget any user_id
-    session.clear()
-
-    if request.method == "POST":
-        session["userName"] = request.form.get("username")
-        userName = session["userName"] 
-        print(userName)
-        return redirect(url_for('index'))
-    else:
-        return userName
 
 
 @app.route("/first")

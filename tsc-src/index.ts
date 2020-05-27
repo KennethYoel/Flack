@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
         paraGraph.innerHTML = data.chats;
         // Add new item to chat list
         document.querySelector('#chat-sent').append(paraGraph);
+        // Add timestamp
+        document.querySelector('#senders-timestamp').innerHTML = data.timestamp;
       }
     }
 
@@ -58,8 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
       paraGraph.innerHTML = data.chats;
       // Add new item to chat list
       document.querySelector('#chat-received').append(paraGraph);
-       // Add name to received chat
-       document.querySelector('#receiving-name').innerHTML = data.usersname; 
+      // Add name to received chat
+      document.querySelector('#receiving-name').innerHTML = data.usersname;
+      // Add timestamp
+      document.querySelector('#receivers-timestamp').innerHTML = data.timestamp;
     }
   });
 });
