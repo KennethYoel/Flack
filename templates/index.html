@@ -161,6 +161,17 @@
       </div>
 
       <!-- Messenger Content -->
+      {% for key, value in messageList.items() %}
+      <div class="d-flex flex-row">
+        <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
+        <div class="chat-container container-width">
+          <!-- <p><span id="receiving-name"></span> <span id="receivers-timestamp" class="time-right"></span></p> -->
+          {{ key|e }}
+          {{ value|e }}
+        </div>
+      </div>
+      {% endfor %}
+
       <div class="d-flex flex-row">
         <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
         <div id="chat-received" class="chat-container container-width">
@@ -172,14 +183,6 @@
         <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
         <div id="chat-sent" class="chat-container darker container-width">
           <p><span id="senders-name"></span> <span id="senders-timestamp" class="time-left"></span></p>
-        </div>
-      </div>
-
-      <div class="d-flex flex-row">
-        <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
-        <div class="chat-container container-width">
-          <p>Sweet! So, what do you wanna do today?</p>
-          <span class="time-right">11:02</span>
         </div>
       </div>
 
