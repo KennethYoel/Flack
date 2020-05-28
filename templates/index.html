@@ -162,14 +162,14 @@
 
       <!-- Messenger Content -->
       {% for key, value in messageList.items() %}
-      <div class="d-flex flex-row">
-        <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
-        <div class="chat-container container-width">
-          <!-- <p><span id="receiving-name"></span> <span id="receivers-timestamp" class="time-right"></span></p> -->
-          {{ key|e }}
-          {{ value|e }}
+        <div class="d-flex flex-row">
+          <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
+          <div class="chat-container container-width">
+            <p>{{ value.name|e }} <span class="time-right">{{ value.timestamp|e }}</span></p>
+            {{ key|e }}
+            <p>{{ value.messages|e }}</p>
+          </div>
         </div>
-      </div>
       {% endfor %}
 
       <div class="d-flex flex-row">
