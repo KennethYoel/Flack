@@ -1,9 +1,9 @@
 {% extends "layout.html" %} 
 
-{% block content %}
-<!-- Secondary SideNav -->
-<nav class="col-md-3 ml-md-5 pl-5 d-none d-md-block sidebar bottom-sidebar">
-  <!-- <div class="sidebar-sticky">
+{% block head %}
+  {{ super() }}
+  <!-- User List -->
+  <script id="users-list" type="text/template">
     <div class="d-flex">
       <div class="flex-column">
         <h5>Chat</h5>
@@ -11,16 +11,58 @@
           <li class="media pt-2">
             <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px; border-radius: 50%;">
             <div class="media-body">
-              <p class="my-0">Chatter</p>
+              <p class="my-0">{% raw -%}{{ contents }}{%- endraw %}</p>
               <p class="mb-0">Cras sit amet nibh libero.</p>
             </div>
           </li>
         </ul>
       </div>
     </div>
-  </div> -->
+  </script>
+  <script id="chat-list" type="text/template">
+    <!-- Messenger Content -->
+    {% for key, value in messageList.items() %}
+      <div class="d-flex flex-row">
+        <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
+        <div class="chat-container container-width">
+          <p>{{ value.name|e }} <span class="time-right">{{ value.timestamp|e }}</span></p>
+          {{ key|e }}
+          <p>{{ value.messages|e }}</p>
+        </div>
+      </div>
+    {% endfor %}
 
-  <div class="sidebar-sticky">
+    <div class="d-flex flex-row">
+      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
+      <div id="chat-received" class="chat-container container-width">
+        <p><span id="receiving-name"></span> <span id="receivers-timestamp" class="time-right"></span></p>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row-reverse">
+      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
+      <div id="chat-sent" class="chat-container darker container-width">
+        <p><span id="senders-name"></span> <span id="senders-timestamp" class="time-left"></span></p>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row-reverse">
+      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
+      <div class="chat-container darker container-width">
+        <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
+        <span class="time-left">11:05</span>
+      </div>
+    </div>
+
+    <form id="messenger-form">
+      <input id="userinput" class="form-control form-control-dark mb-2 ml-md-5 form-width" type="text" autocomplete="off" autofocus >
+      <div class="d-flex flex-row-reverse pb-3 ml-md-5 form-width">
+        <button id="submit-msg" data-user="">Send</button>
+      </div>
+    </form>
+  </script>
+  <!-- Channel List -->
+  <script id="channel-list" type="text/template">
     <div class="d-flex flex-column">
       <h5>Channel List</h5>
       <div>
@@ -46,69 +88,63 @@
         </ul>
       </div>
       <div class="channel-button">
-        <button type="button" class="btn border-top" data-toggle="takesMeToCreateChannelPage" data-target="#takesMeToCreateChannelPage">
-          <span data-feather="tv" class="mb-1"></span> Join or Create Channel
+        <button id="create-channel" type="button" class="btn border-top" data-toggle="takesMeToCreateChannelPage" data-target="#takesMeToCreateChannelPage">
+          <span data-feather="tv" class="mb-2"></span> Join or Create Channel
         </button>
       </div>
     </div>
-  </div>
-</nav>
-<!-- Main Content -->
-<main role="main" class="col-md-9 ml-md-auto col-lg-9 px-4">
-  <div class="row">
-    <div class="col-md-9 ml-md-5">
-      <div class="media mb-3">
-        <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px" />
-        <div class="media-body">
-          <h5 id="channel" class="mt-1"></h5>
-        </div>
+  </script>
+  <script id="channel-cards" type="text/template">
+    <div class="media mb-3">
+      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px" />
+      <div class="media-body">
+        <h5 id="channel" class="mt-3"></h5>
       </div>
-
-      <!-- Create/Join Team Content -->
-      <div class="row row-cols-1 row-cols-md-3">
-        <div class="col mb-4">
-          <div class="card">
-            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="card-img-top mx-auto pt-3" alt="cycloid" style="width: 64px; height: 64px" />
-            <div class="card-body">
-              <h5 class="card-title text-center">Create A Channel</h5>
-              <div class="d-flex justify-content-center py-2">
-                <span data-feather="users"></span><span data-feather="users"></span><span data-feather="users"></span>
-              </div>
-              <div class="d-flex justify-content-center pt-2 border-top">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCenter">
-                  <span data-feather="tv" class="mb-1"></span> Create Channel
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="modalCenterTitle">Create Your Team</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <form>
-                          <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Name</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                          </div>
-                          <div class="form-group">
-                            <label for="message-text" class="col-form-label">Description (optional)</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                          </div>
-                          <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Privacy</label>
-                            <input type="text" class="form-control" id="recipient-name" value="Public - Anyone can add members.">
-                          </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Create Channel</button>
-                      </div>
+    </div>
+    <!-- Create/Join Team Content -->
+    <div class="row row-cols-1 row-cols-md-3">
+      <div class="col mb-4">
+        <div class="card">
+          <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="card-img-top mx-auto pt-3" alt="cycloid" style="width: 64px; height: 64px" />
+          <div class="card-body">
+            <h5 class="card-title text-center">Create A Channel</h5>
+            <div class="d-flex justify-content-center py-2">
+              <span data-feather="users"></span><span data-feather="users"></span><span data-feather="users"></span>
+            </div>
+            <div class="d-flex justify-content-center pt-2 border-top">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCenter">
+                <span data-feather="tv" class="mb-1"></span> Create Channel
+              </button>
+              <!-- Modal -->
+              <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCenterTitle">Create Your Team</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">Name</label>
+                          <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                          <label for="message-text" class="col-form-label">Description (optional)</label>
+                          <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="recipient-name" class="col-form-label">Privacy</label>
+                          <input type="text" class="form-control" id="recipient-name" value="Public - Anyone can add members.">
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Create Channel</button>
                     </div>
                   </div>
                 </div>
@@ -116,91 +152,50 @@
             </div>
           </div>
         </div>
-        <!-- Channels Created -->
-        <div class="col mb-4">
-          <div class="card">
-            <div class="d-flex justify-content-center align-items-center pt-3">
-              <h2><span class="badge badge-secondary">NT</span></h2>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title text-center mb-0">Name of Team</h5>
-              <p class="card-text text-center">34 members | Public</p>
-              <div class="d-flex justify-content-center pb-2">
-                <span data-feather="user">
-              </div>
-              <div class="d-flex justify-content-center pt-2 border-top">
-                <p class="card-text text-center">Description of the team created.</p>
-              </div>
-              <div class="d-flex justify-content-center pt-2">
-                <button type="button" class="btn btn-primary">
-                  <span data-feather="user-plus" class="mb-1"></span> Join Channel
-                </button>
-              </div>
-            </div>
+      </div>
+      <!-- Channels Created -->
+      <div class="col mb-4">
+        <div class="card">
+          <div class="d-flex justify-content-center align-items-center pt-3">
+            <h2><span class="badge badge-secondary">NT</span></h2>
           </div>
-        </div>
-
-        <div class="col mb-4">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+          <div class="card-body">
+            <h5 class="card-title text-center mb-0">Name of Team</h5>
+            <p class="card-text text-center">34 members | Public</p>
+            <div class="d-flex justify-content-center pb-2">
+              <span data-feather="user">
             </div>
-          </div>
-        </div>
-        <div class="col mb-4">
-          <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <div class="d-flex justify-content-center pt-2 border-top">
+              <p class="card-text text-center">Description of the team created.</p>
+            </div>
+            <div class="d-flex justify-content-center pt-2">
+              <button type="button" class="btn btn-primary">
+                <span data-feather="user-plus" class="mb-1"></span> Join Channel
+              </button>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </script>
+  <script src="{{ url_for('static', filename='users.js') }}"></script>
+  <script src="{{ url_for('static', filename='channels.js') }}"></script>
+  <script src="{{ url_for('static', filename='create-channel.js') }}"></script>
+{% endblock %}
 
-      <!-- Messenger Content -->
-      {% for key, value in messageList.items() %}
-        <div class="d-flex flex-row">
-          <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
-          <div class="chat-container container-width">
-            <p>{{ value.name|e }} <span class="time-right">{{ value.timestamp|e }}</span></p>
-            {{ key|e }}
-            <p>{{ value.messages|e }}</p>
-          </div>
-        </div>
-      {% endfor %}
-
-      <div class="d-flex flex-row">
-        <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
-        <div id="chat-received" class="chat-container container-width">
-          <p><span id="receiving-name"></span> <span id="receivers-timestamp" class="time-right"></span></p>
-        </div>
-      </div>
-
-      <div class="d-flex flex-row-reverse">
-        <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
-        <div id="chat-sent" class="chat-container darker container-width">
-          <p><span id="senders-name"></span> <span id="senders-timestamp" class="time-left"></span></p>
-        </div>
-      </div>
-
-      <div class="d-flex flex-row-reverse">
-        <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
-        <div class="chat-container darker container-width">
-          <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-          <span class="time-left">11:05</span>
-        </div>
-      </div>
+{% block content %}
+<!-- Secondary SideNav -->
+<nav class="col-md-3 ml-md-5 pl-5 d-none d-md-block sidebar bottom-sidebar">
+  <div id="create-lists" class="sidebar-sticky">
+    
+  </div>
+</nav>
+<!-- Main Content -->
+<main role="main" class="col-md-9 ml-md-auto col-lg-9 px-4">
+  <div class="row">
+    <div id="main-view" class="col-md-9 ml-md-5">
     </div>
   </div>
-  <form id="messenger-form">
-    <input id="userinput" class="form-control form-control-dark mb-2 ml-md-5 form-width" type="text" autocomplete="off" autofocus >
-    <div class="d-flex flex-row-reverse pb-3 ml-md-5 form-width">
-      <button id="submit-msg" data-user="">Send</button>
-    </div>
-  </form>
   <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
 </main>
 {% endblock %}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  {% block head %}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,14 +37,11 @@
       type="text/javascript"
       src="{{ url_for('static', filename='messenger.js') }}"
     ></script>
-    <!-- Handlebar JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-    <script
-      type="text/template"
-      src="{{ url_for('static', filename='templates.js') }}"
-    ></script>
+    <!-- Handlebar JS Template -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
     <title>Flack</title>
   </head>
+  {% endblock %}
   <body>
     <!-- Modal Front Page -->
     <div
@@ -109,7 +107,7 @@
           <li class="nav-item text-nowrap">
             <a class="nav-link" href="#"
               ><span data-feather="user-check" class="text-white"></span
-            ><p id="user-input">{{ nameOfUser }}</p></a>
+            ><p id="user-name"></p></a>
           </li>
         </ul>
       </div>
@@ -123,13 +121,13 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link text-center text-white" href="#"
+                <a id="message-list" class="nav-link text-center text-white" href="#"
                   ><span data-feather="voicemail" class="d-block mx-auto"></span
                   >DM</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link text-center text-white" href="#"
+                <a id="chat-link" class="nav-link text-center text-white" href="#"
                   ><span
                     data-feather="message-circle"
                     class="d-block mx-auto"
@@ -138,7 +136,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link text-center text-white" href="#"
+                <a id="channel-link" class="nav-link text-center text-white" href="#"
                   ><span data-feather="tv" class="d-block mx-auto"></span
                   >Channel</a
                 >

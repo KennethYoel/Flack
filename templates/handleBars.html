@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+    
+    <script id="result" type="text/template">
+        <li>
+            You rolled:
+            {{#each values}}
+                <img alt="{{ this }}" title="{{ this }}" src="img/{{ this }}.png">
+            {{/each}}
+            (Total: {{ total }})
+        </li>
+    </script>
+    
+    <script src="template.js"></script>
+  </head>
+  <body>
+    <input id="counter" type="number" placeholder="Number of Rolls" min="1" value="1">
+    <button id="roll">Roll</button>
+    <ul id="rolls">
+    </ul>
+  </body>
+</html>
