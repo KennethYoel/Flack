@@ -1,4 +1,34 @@
+// Template for secondary side-nav.
+// Grab the source's.
+const channelListSource = document.querySelector('#channel-list').innerHTML;
+// const createChannelSource = document.querySelector('#channel-cards').innerHTML;
+const userListSource = document.querySelector('#users-list').innerHTML;
+const respondSource = document.querySelector('#message-sent').innerHTML;
+const receivedSource = document.querySelector('#message-received').innerHTML;
+// Compile them using Handlebars.
+const channelListTemplate = Handlebars.compile(channelListSource);
+// const createChannelTemplate = Handlebars.compile(createChannelSource);
+const userListTemplate = Handlebars.compile(userListSource);
+const respondTemplate = Handlebars.compile(respondSource);
+const receivedTemplate = Handlebars.compile(receivedSource);
 document.addEventListener('DOMContentLoaded', () => {
+    // Add last loaded source to DOM.
+    const channelContent = channelListTemplate();
+    document.querySelector('#create-lists').innerHTML = channelContent;
+    // const messagesContent = chatListTemplate();
+    // document.querySelector('#main-view').innerHTML = messagesContent;
+    // Sidenav Channel Contents Links
+    document.querySelector('#channel-link').onclick = () => {
+        // Add channel list source to DOM.
+        const listContent = channelListTemplate();
+        document.querySelector('#create-lists').innerHTML = listContent;
+    };
+    // Create Channel Contents on Main View
+    // document.querySelector('#create-channel').onclick = () => {
+    //     // Add source to DOM.
+    //     const createChannelContent = createChannelTemplate();
+    //     document.querySelector('#main-view').innerHTML = createChannelContent;
+    // };
     // Connect to websocket
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
     // When connected, configure buttons
@@ -36,25 +66,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const username = document.querySelector('#submit-msg').dataset.user;
         if (typeof data.usersname != 'undefined') {
             if (data.usersname == username) {
-                // Create new item for list
-                const paraGraph = document.createElement('p');
-                paraGraph.innerHTML = data.chats;
-                // Add new item to chat list
-                document.querySelector('#chat-sent').append(paraGraph);
-                // Add timestamp
-                document.querySelector('#senders-timestamp').innerHTML = data.timestamp;
+                // Add senders respond chat source to DOM. Use plus equal to generate new template with each click.
+                const respondChat = data.chats;
+                const respondTimestamp = data.timestamp;
+                const respondedName = data.usersname;
+                const chatContent = respondTemplate({ respondedNameContent: respondedName, respondedChatContent: respondChat, respondedTimestamp: respondTimestamp });
+                document.querySelector('#main-view').innerHTML += chatContent;
             }
         }
         if (data.usersname != username) {
-            // Create new item for list
-            const paraGraph = document.createElement('p');
-            paraGraph.innerHTML = data.chats;
-            // Add new item to chat list
-            document.querySelector('#chat-received').append(paraGraph);
-            // Add name to received chat
-            document.querySelector('#receiving-name').innerHTML = data.usersname;
-            // Add timestamp
-            document.querySelector('#receivers-timestamp').innerHTML = data.timestamp;
+            // Add receivers respond chat source to DOM. Use plus equal to generate new template with each click.
+            const receivedChat = data.chats;
+            const receivedTimestamp = data.timestamp;
+            const receivedName = data.usersname;
+            const chatContent = receivedTemplate({ receivedNameContent: receivedName, receivedChatContent: receivedChat, receivedTimestamp: receivedTimestamp });
+            document.querySelector('#main-view').innerHTML += chatContent;
         }
     });
 });

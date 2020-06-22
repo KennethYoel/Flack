@@ -58,4 +58,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=websocket.js.map

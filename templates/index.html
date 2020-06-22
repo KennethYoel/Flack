@@ -19,47 +19,24 @@
       </div>
     </div>
   </script>
-  <script id="chat-list" type="text/template">
-    <!-- Messenger Content -->
-    {% for key, value in messageList.items() %}
-      <div class="d-flex flex-row">
-        <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
-        <div class="chat-container container-width">
-          <p>{{ value.name|e }} <span class="time-right">{{ value.timestamp|e }}</span></p>
-          {{ key|e }}
-          <p>{{ value.messages|e }}</p>
-        </div>
-      </div>
-    {% endfor %}
-
-    <div class="d-flex flex-row">
-      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
-      <div id="chat-received" class="chat-container container-width">
-        <p><span id="receiving-name"></span> <span id="receivers-timestamp" class="time-right"></span></p>
-      </div>
-    </div>
-
+  <!-- Messenger Content -->
+  <script id="message-sent" type="text/template">
     <div class="d-flex flex-row-reverse">
       <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
       <div id="chat-sent" class="chat-container darker container-width">
-        <p><span id="senders-name"></span> <span id="senders-timestamp" class="time-left"></span></p>
+        <p><span id="senders-name">{% raw -%}{{ respondedNameContent }}{%- endraw %}</span> <span id="senders-timestamp" class="time-left">{% raw -%}{{ respondedTimestamp }}{%- endraw %}</span></p>
+        <p>{% raw -%}{{ respondedChatContent }}{%- endraw %}</p>
       </div>
     </div>
-
-    <div class="d-flex flex-row-reverse">
-      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
-      <div class="chat-container darker container-width">
-        <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-        <span class="time-left">11:05</span>
+  </script>
+  <script id="message-received" type="text/template">
+    <div class="d-flex flex-row">
+      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
+      <div id="chat-received" class="chat-container container-width">
+        <p><span id="receiving-name">{% raw -%}{{ receivedNameContent }}{%- endraw %}</span> <span id="receivers-timestamp" class="time-right">{% raw -%}{{ receivedTimestamp }}{%- endraw %}</span></p>
+        <p>{% raw -%}{{ receivedChatContent }}{%- endraw %}</p>
       </div>
     </div>
-
-    <form id="messenger-form">
-      <input id="userinput" class="form-control form-control-dark mb-2 ml-md-5 form-width" type="text" autocomplete="off" autofocus >
-      <div class="d-flex flex-row-reverse pb-3 ml-md-5 form-width">
-        <button id="submit-msg" data-user="">Send</button>
-      </div>
-    </form>
   </script>
   <!-- Channel List -->
   <script id="channel-list" type="text/template">
@@ -178,9 +155,6 @@
       </div>
     </div>
   </script>
-  <script src="{{ url_for('static', filename='users.js') }}"></script>
-  <script src="{{ url_for('static', filename='channels.js') }}"></script>
-  <script src="{{ url_for('static', filename='create-channel.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -193,9 +167,29 @@
 <!-- Main Content -->
 <main role="main" class="col-md-9 ml-md-auto col-lg-9 px-4">
   <div class="row">
-    <div id="main-view" class="col-md-9 ml-md-5">
+    <div class="col-md-9 ml-md-5">
+      <!-- Messenger Content -->
+      {% for key, value in messageList.items() %}
+        <div class="d-flex flex-row">
+          <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
+          <div class="chat-container container-width">
+            <p>{{ value.name|e }} <span class="time-right">{{ value.timestamp|e }}</span></p>
+            {{ key|e }}
+            <p>{{ value.messages|e }}</p>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
+  <span id="main-view">
+
+  </span>
+  <form id="messenger-form">
+    <input id="userinput" class="form-control form-control mb-2 ml-md-5 form-width" type="text" autocomplete="off" autofocus >
+    <div class="d-flex flex-row-reverse pb-3 ml-md-5 form-width">
+      <button id="submit-msg" data-user="">Send</button>
+    </div>
+  </form>
   <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
 </main>
 {% endblock %}

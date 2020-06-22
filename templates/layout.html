@@ -23,10 +23,10 @@
       type="text/javascript"
       src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"
     ></script>
-    <script
+    <!-- <script
       type="text/javascript"
       src="{{ url_for('static', filename='index.js') }}"
-    ></script>
+    ></script> -->
     <!-- Side Nav JS Codes -->
     <script
       type="text/javascript"
@@ -187,19 +187,21 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-    <!-- Custome JS -->
+    <!-- Handlebars JS -->
+    <script type="text/ecmascript" src="{{ url_for('static', filename='index.js') }}"></script>
+    <!-- Feather Icon JS -->
     <script
-      type="text/javascript"
+    type="text/ecmascript"
       src="{{ url_for('static', filename='feather.js') }}"
     ></script>
     <!-- Modal JS -->
     <script
-      type="text/javascript"
+    type="text/ecmascript"
       src="{{ url_for('static', filename='modal.js') }}"
     ></script>
     <!-- OffCanvas JS -->
     <script
-      type="text/javascript"
+    type="text/ecmascript"
       src="{{ url_for('static', filename='offcanvas.js') }}"
     ></script>
   </body>
