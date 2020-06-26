@@ -23,7 +23,24 @@ count = 0
 @app.route("/", methods=["GET", "POST"])
 def index():
     """Single page app"""
-    return render_template("index.html", messageList=usersMessages)
+    if session.get("userName") is None:
+        session["userName"] = []
+
+    return render_template(
+        "index.html", nameOfUser=session["userName"], messageList=usersMessages
+    )
+
+
+@app.route("/posts", methods=["POST"])
+def posts():
+    # Get username.
+    namew = request.form.get("name")
+
+    # Artificially delay speed of response.
+    # time.sleep(1)
+
+    # Return list of posts.
+    return jsonify(usersMessages)
 
 
 @socketio.on("submit chat")
@@ -34,48 +51,33 @@ def loveLetter(json):
     session.clear()
 
     # some JSON:
-    session["userName"] = json['usersname']
+    session["userName"] = json["usersname"]
 
     if bool(json) == True:
-        usersMessages['usersMessages' + str(count)] = {'name': session["userName"], 'timestamp':  json['timestamp'], 'messages': json['chats']} # create a foor loop to create nested Dict {}
-        count = count + 1
+        if len(usersMessages) == 99:
+            removeMessage = "usersMessages" + str(count - 99)
+            usersMessages.pop(removeMessage)
 
-    print("received my event: " + str(usersMessages))  # so create a session[json["username"]] = json["chats"]
+            usersMessages["usersMessages" + str(count)] = {
+            "name": session["userName"],
+            "timestamp": json["timestamp"],
+            "messages": json["chats"],
+            } 
+        else:
+            usersMessages["usersMessages" + str(count)] = {
+            "name": session["userName"],
+            "timestamp": json["timestamp"],
+            "messages": json["chats"],
+            }  # create a foor loop to create nested Dict {}
+    count = count + 1
+
+
+    print(
+        "received my event: " + str(usersMessages)
+    )  # so create a session[json["username"]] = json["chats"]
     # some emitting
+    print(len(usersMessages))
     emit("message all", json, broadcast=True)
-
-
-@app.route("/first")
-def first():
-    return channelName[0]
-
-
-@app.route("/second")
-def second():
-    return channelName[1]
-
-
-@app.route("/third")
-def third():
-    return channelName[2]
-
-
-@app.route("/posts", methods=["POST"])
-def posts():
-    # Get start and end point for posts to generate.
-    start = int(request.form.get("start") or 0)
-    end = int(request.form.get("end") or (start + 100))
-
-    # Generate list of posts.
-    data = []
-    for i in range(start, end + 1):
-        data.append(f"Post #{i}")
-
-        # Artificially delay speed of response.
-        time.sleep(1)
-
-        # Return list of posts.
-        return jsonify(data)
 
 
 if __name__ == "__main__":

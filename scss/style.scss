@@ -90,8 +90,8 @@ body {
   background-color: white;
 }
 
-.channel-button {
-  margin-top: calc(100vh - 210px);
+.create-channel-button {
+  margin-top: calc(100vh - 290px); 
   button {
     margin-left: 3vw;
     margin-right: 3vw;
@@ -112,9 +112,8 @@ body {
     padding-top: 52px; /* Space for top fixed navbar */
     padding-bottom: 12px; /* Space for bottom fixed navbar */
   }
-
   .form-width {
-    width: 75%;
+    width: 75% !important;
   }
 }
 
@@ -200,13 +199,13 @@ body {
 /* Style time text */
 .time-right {
   //float: right;
-  color: #aaa;
+  color: white;
 }
 
 /* Style time text */
 .time-left {
   //float: left;
-  color: white;
+  color: red;
 }
 
 /* OffCanvas */

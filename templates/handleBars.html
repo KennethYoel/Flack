@@ -20,5 +20,25 @@
     <button id="roll">Roll</button>
     <ul id="rolls">
     </ul>
+
+    {% for key, value in messageList.items() %}
+        {% if nameOfUser == value.name %}
+          <div class="d-flex flex-row-reverse">
+            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
+            <div id="chat-sent" class="chat-container darker container-width">
+              <p>{{ value.name|e }} <span id="senders-timestamp" class="time-right">{{ value.timestamp|e }}}</span></p>
+              <p>{{ value.messages|e }}</p>
+            </div>
+          </div>
+        {% else %}
+          <div class="d-flex flex-row">
+            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
+            <div class="chat-container container-width">
+              <p>{{ value.name|e }} <span class="time-left">{{ value.timestamp|e }}</span></p>
+              <p>{{ value.messages|e }}</p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
   </body>
 </html>

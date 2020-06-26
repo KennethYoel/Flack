@@ -24,7 +24,7 @@
     <div class="d-flex flex-row-reverse">
       <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
       <div id="chat-sent" class="chat-container darker container-width">
-        <p><span id="senders-name">{% raw -%}{{ respondedNameContent }}{%- endraw %}</span> <span id="senders-timestamp" class="time-left">{% raw -%}{{ respondedTimestamp }}{%- endraw %}</span></p>
+        <p><span id="senders-name">{% raw -%}{{ respondedNameContent }}{%- endraw %}</span> <span id="senders-timestamp" class="time-right">{% raw -%}{{ respondedTimestamp }}{%- endraw %}</span></p>
         <p>{% raw -%}{{ respondedChatContent }}{%- endraw %}</p>
       </div>
     </div>
@@ -33,7 +33,7 @@
     <div class="d-flex flex-row">
       <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
       <div id="chat-received" class="chat-container container-width">
-        <p><span id="receiving-name">{% raw -%}{{ receivedNameContent }}{%- endraw %}</span> <span id="receivers-timestamp" class="time-right">{% raw -%}{{ receivedTimestamp }}{%- endraw %}</span></p>
+        <p><span id="receiving-name">{% raw -%}{{ receivedNameContent }}{%- endraw %}</span> <span id="receivers-timestamp" class="time-left">{% raw -%}{{ receivedTimestamp }}{%- endraw %}</span></p>
         <p>{% raw -%}{{ receivedChatContent }}{%- endraw %}</p>
       </div>
     </div>
@@ -47,7 +47,7 @@
           <li class="media channel-link pt-2" data-page="first">
             <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px">
             <div class="media-body">
-              <h6 class="mt-0 mb-1">Channel 1</h6>
+              <a id="channel1"><h6 class="mt-0 mb-1">Channel 1</h6></a>
             </div>
           </li>
           <li class="media channel-link pt-2" data-page="second">
@@ -64,7 +64,7 @@
           </li>
         </ul>
       </div>
-      <div class="channel-button">
+      <div class="create-channel-button">
         <button id="create-channel" type="button" class="btn border-top" data-toggle="takesMeToCreateChannelPage" data-target="#takesMeToCreateChannelPage">
           <span data-feather="tv" class="mb-2"></span> Join or Create Channel
         </button>
@@ -169,27 +169,20 @@
   <div class="row">
     <div class="col-md-9 ml-md-5">
       <!-- Messenger Content -->
-      {% for key, value in messageList.items() %}
-        <div class="d-flex flex-row">
-          <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
-          <div class="chat-container container-width">
-            <p>{{ value.name|e }} <span class="time-right">{{ value.timestamp|e }}</span></p>
-            {{ key|e }}
-            <p>{{ value.messages|e }}</p>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-  <span id="main-view">
+      
+      <span id="main-view">
 
-  </span>
-  <form id="messenger-form">
-    <input id="userinput" class="form-control form-control mb-2 ml-md-5 form-width" type="text" autocomplete="off" autofocus >
-    <div class="d-flex flex-row-reverse pb-3 ml-md-5 form-width">
-      <button id="submit-msg" data-user="">Send</button>
+      </span>
     </div>
-  </form>
+    <!-- Webchat Input Form -->
+    <form id="messenger-form" class="input-group form-width mb-3">
+      <label class="sr-only" for="userInput">Send Messages</label>
+      <input type="text" id="userInput" class="form-control ml-md-5" autocomplete="off" autofocus>
+      <div class="input-group-append">
+        <button id="submit-msg" class="btn btn-outline-secondary" data-user="">Send</button>
+      </div>
+    </form>
+  </div>
   <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
 </main>
 {% endblock %}

@@ -90,10 +90,10 @@ body {
   background-color: white;
 }
 
-.channel-button {
-  margin-top: calc(100vh - 210px);
+.create-channel-button {
+  margin-top: calc(100vh - 290px);
 }
-.channel-button button {
+.create-channel-button button {
   margin-left: 3vw;
   margin-right: 3vw;
 }
@@ -117,7 +117,7 @@ body {
   }
 
   .form-width {
-    width: 75%;
+    width: 75% !important;
   }
 }
 /*
@@ -200,12 +200,12 @@ body {
 
 /* Style time text */
 .time-right {
-  color: #aaa;
+  color: white;
 }
 
 /* Style time text */
 .time-left {
-  color: white;
+  color: red;
 }
 
 /* OffCanvas */
