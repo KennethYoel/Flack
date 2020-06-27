@@ -23,18 +23,25 @@ count = 0
 @app.route("/", methods=["GET", "POST"])
 def index():
     """Single page app"""
+    # Forget any user_id
+    session.clear()
+
     if session.get("userName") is None:
         session["userName"] = []
 
-    return render_template(
-        "index.html", nameOfUser=session["userName"], messageList=usersMessages
-    )
+    session["userName"] = request.form.get("nameOfUser")
+
+    print(session["userName"])
+
+    return render_template("index.html")
 
 
 @app.route("/posts", methods=["POST"])
 def posts():
     # Get username.
-    namew = request.form.get("name")
+    theName = request.form.get("name")
+
+    print("Sucess with returning a list by " + theName)
 
     # Artificially delay speed of response.
     # time.sleep(1)
@@ -47,36 +54,27 @@ def posts():
 def loveLetter(json):
     global usersMessages, count
 
-    # Forget any user_id
-    session.clear()
-
-    # some JSON:
-    session["userName"] = json["usersname"]
-
     if bool(json) == True:
         if len(usersMessages) == 99:
             removeMessage = "usersMessages" + str(count - 99)
             usersMessages.pop(removeMessage)
 
             usersMessages["usersMessages" + str(count)] = {
-            "name": session["userName"],
+            "name": json["usersname"],
             "timestamp": json["timestamp"],
             "messages": json["chats"],
             } 
         else:
             usersMessages["usersMessages" + str(count)] = {
-            "name": session["userName"],
+            "name": json["usersname"],
             "timestamp": json["timestamp"],
             "messages": json["chats"],
             }  # create a foor loop to create nested Dict {}
     count = count + 1
 
+    print("received my event: " + str(usersMessages))  
 
-    print(
-        "received my event: " + str(usersMessages)
-    )  # so create a session[json["username"]] = json["chats"]
     # some emitting
-    print(len(usersMessages))
     emit("message all", json, broadcast=True)
 
 

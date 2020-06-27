@@ -2,75 +2,6 @@
 
 {% block head %}
   {{ super() }}
-  <!-- User List -->
-  <script id="users-list" type="text/template">
-    <div class="d-flex">
-      <div class="flex-column">
-        <h5>Chat</h5>
-        <ul class="list-unstyled pt-2">
-          <li class="media pt-2">
-            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px; border-radius: 50%;">
-            <div class="media-body">
-              <p class="my-0">{% raw -%}{{ contents }}{%- endraw %}</p>
-              <p class="mb-0">Cras sit amet nibh libero.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </script>
-  <!-- Messenger Content -->
-  <script id="message-sent" type="text/template">
-    <div class="d-flex flex-row-reverse">
-      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
-      <div id="chat-sent" class="chat-container darker container-width">
-        <p><span id="senders-name">{% raw -%}{{ respondedNameContent }}{%- endraw %}</span> <span id="senders-timestamp" class="time-right">{% raw -%}{{ respondedTimestamp }}{%- endraw %}</span></p>
-        <p>{% raw -%}{{ respondedChatContent }}{%- endraw %}</p>
-      </div>
-    </div>
-  </script>
-  <script id="message-received" type="text/template">
-    <div class="d-flex flex-row">
-      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
-      <div id="chat-received" class="chat-container container-width">
-        <p><span id="receiving-name">{% raw -%}{{ receivedNameContent }}{%- endraw %}</span> <span id="receivers-timestamp" class="time-left">{% raw -%}{{ receivedTimestamp }}{%- endraw %}</span></p>
-        <p>{% raw -%}{{ receivedChatContent }}{%- endraw %}</p>
-      </div>
-    </div>
-  </script>
-  <!-- Channel List -->
-  <script id="channel-list" type="text/template">
-    <div class="d-flex flex-column">
-      <h5>Channel List</h5>
-      <div>
-        <ul id="nav" class="list-unstyled pt-2">
-          <li class="media channel-link pt-2" data-page="first">
-            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px">
-            <div class="media-body">
-              <a id="channel1"><h6 class="mt-0 mb-1">Channel 1</h6></a>
-            </div>
-          </li>
-          <li class="media channel-link pt-2" data-page="second">
-            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975943/tri_heart.gif" class="align-self-center mr-3" alt="tri-heart" style="width: 32px; height: 32px">
-            <div class="media-body">
-              <h6 class="mt-0 mb-1">Channel 2</h6>
-            </div>
-          </li>
-          <li class="media channel-link pt-2" data-page="third">
-            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975947/worm.II.gif" class="align-self-center mr-3" alt="worm" style="width: 32px; height: 32px">
-            <div class="media-body">
-              <h6 class="mt-0 mb-1">Channel 3</h6>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="create-channel-button">
-        <button id="create-channel" type="button" class="btn border-top" data-toggle="takesMeToCreateChannelPage" data-target="#takesMeToCreateChannelPage">
-          <span data-feather="tv" class="mb-2"></span> Join or Create Channel
-        </button>
-      </div>
-    </div>
-  </script>
   <script id="channel-cards" type="text/template">
     <div class="media mb-3">
       <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px" />
@@ -155,6 +86,75 @@
       </div>
     </div>
   </script>
+  <!-- Channel List -->
+  <script id="channel-list" type="text/template">
+    <div class="d-flex flex-column">
+      <h5>Channel List</h5>
+      <div>
+        <ul id="nav" class="list-unstyled pt-2">
+          <li class="media channel-link pt-2" data-page="first">
+            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px">
+            <div class="media-body">
+              <a id="channel1"><h6 class="mt-0 mb-1">Channel 1</h6></a>
+            </div>
+          </li>
+          <li class="media channel-link pt-2" data-page="second">
+            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975943/tri_heart.gif" class="align-self-center mr-3" alt="tri-heart" style="width: 32px; height: 32px">
+            <div class="media-body">
+              <h6 class="mt-0 mb-1">Channel 2</h6>
+            </div>
+          </li>
+          <li class="media channel-link pt-2" data-page="third">
+            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975947/worm.II.gif" class="align-self-center mr-3" alt="worm" style="width: 32px; height: 32px">
+            <div class="media-body">
+              <h6 class="mt-0 mb-1">Channel 3</h6>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="create-channel-button">
+        <button id="create-channel" type="button" class="btn border-top" data-toggle="takesMeToCreateChannelPage" data-target="#takesMeToCreateChannelPage">
+          <span data-feather="tv" class="mb-2"></span> Join or Create Channel
+        </button>
+      </div>
+    </div>
+  </script>
+  <!-- User List -->
+  <script id="users-list" type="text/template">
+    <div class="d-flex">
+      <div class="flex-column">
+        <h5>Chat</h5>
+        <ul class="list-unstyled pt-2">
+          <li class="media pt-2">
+            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px; border-radius: 50%;">
+            <div class="media-body">
+              <p class="my-0">{% raw -%}{{ contents }}{%- endraw %}</p>
+              <p class="mb-0">Cras sit amet nibh libero.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </script>
+  <!-- Messenger Content -->
+  <script id="message-sent" type="text/template">
+    <div class="d-flex flex-row-reverse">
+      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1585779597/self.jpg" alt="Avatar" class="chat-img-right" />
+      <div id="chat-sent" class="chat-container darker container-width">
+        <p><span id="senders-name">{% raw -%}{{ respondedNameContent }}{%- endraw %}</span> <span id="senders-timestamp" class="time-right">{% raw -%}{{ respondedTimestamp }}{%- endraw %}</span></p>
+        <p>{% raw -%}{{ respondedChatContent }}{%- endraw %}</p>
+      </div>
+    </div>
+  </script>
+  <script id="message-received" type="text/template">
+    <div class="d-flex flex-row">
+      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1530975582/HAL-9000.png" alt="Avatar" class="chat-img" />
+      <div id="chat-received" class="chat-container container-width">
+        <p><span id="receiving-name">{% raw -%}{{ receivedNameContent }}{%- endraw %}</span> <span id="receivers-timestamp" class="time-left">{% raw -%}{{ receivedTimestamp }}{%- endraw %}</span></p>
+        <p>{% raw -%}{{ receivedChatContent }}{%- endraw %}</p>
+      </div>
+    </div>
+  </script>
 {% endblock %}
 
 {% block content %}
@@ -167,12 +167,8 @@
 <!-- Main Content -->
 <main role="main" class="col-md-9 ml-md-auto col-lg-9 px-4">
   <div class="row">
-    <div class="col-md-9 ml-md-5">
-      <!-- Messenger Content -->
+    <div id="main-view" class="col-md-9 ml-md-5">
       
-      <span id="main-view">
-
-      </span>
     </div>
     <!-- Webchat Input Form -->
     <form id="messenger-form" class="input-group form-width mb-3">
@@ -183,6 +179,5 @@
       </div>
     </form>
   </div>
-  <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
 </main>
 {% endblock %}
