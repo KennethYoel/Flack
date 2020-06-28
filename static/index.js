@@ -30,6 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const listContent = channelListTemplate();
         document.querySelector('#create-lists').innerHTML = listContent;
     };
+    // Sidenav Channel Users Links
+    document.querySelector('#chat-link').onclick = () => {
+        // Add channel list source to DOM.
+        const listContent = userListTemplate();
+        document.querySelector('#create-lists').innerHTML = listContent;
+    };
     // Show messenger input form and hide create channel from main view.
     document.querySelector('#channel1').onclick = () => {
         // Remove the display none css styling.
@@ -43,16 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#join-create-channel').removeAttribute("style");
         // Add display none to messenger input form.
         document.querySelector('#messenger-form').style.display = 'none';
-        // Add create channel source to DOM.
-        const createChannelContent = createChannelTemplate();
-        document.querySelector('#main-view').innerHTML = createChannelContent;
-        // use dispay none instead of handle bars to display it when i click join or create channel and hide it when a channell is choosen.
-    };
-    // Sidenav Channel Users Links
-    document.querySelector('#chat-link').onclick = () => {
-        // Add channel list source to DOM.
-        const listContent = userListTemplate();
-        document.querySelector('#create-lists').innerHTML = listContent;
     };
     // Loading websockets rooms/channels.
     // When DOM is loaded, render up to the first 100 posts.

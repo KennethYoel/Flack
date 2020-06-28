@@ -51,7 +51,7 @@ def posts():
 
 
 @socketio.on("submit chat")
-def loveLetter(json):
+def flacMessenger(json):
     global usersMessages, count
 
     if bool(json) == True:

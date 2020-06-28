@@ -90,14 +90,6 @@ body {
   background-color: white;
 }
 
-.create-channel-button {
-  margin-top: calc(100vh - 290px); 
-  button {
-    margin-left: 3vw;
-    margin-right: 3vw;
-  }
-}
-
 /*
  * Content
  */
@@ -106,15 +98,6 @@ body {
   padding-top: 52px; /* Space for top fixed navbar */
   padding-bottom: 93px; /* Space for bottom fixed navbar */
 }
-
-// .form-placement {
-//   margin-left:29vw;
-//   margin-bottom:11vw;
-// }
-
-// .form-button-placement {
-//   margin-bottom: 11vw;
-// }
 
 @media (min-width: 768px) {
   [role='main'] {
