@@ -107,13 +107,19 @@ body {
   padding-bottom: 93px; /* Space for bottom fixed navbar */
 }
 
+// .form-placement {
+//   margin-left:29vw;
+//   margin-bottom:11vw;
+// }
+
+// .form-button-placement {
+//   margin-bottom: 11vw;
+// }
+
 @media (min-width: 768px) {
   [role='main'] {
     padding-top: 52px; /* Space for top fixed navbar */
     padding-bottom: 12px; /* Space for bottom fixed navbar */
-  }
-  .form-width {
-    width: 75% !important;
   }
 }
 

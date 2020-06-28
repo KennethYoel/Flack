@@ -3,56 +3,58 @@
 {% block head %}
   {{ super() }}
   <script id="channel-cards" type="text/template">
-    <div class="media mb-3">
-      <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px" />
-      <div class="media-body">
-        <h5 id="channel" class="mt-3"></h5>
+    <span id="join-create-channel">
+      <div class="media my-3">
+        <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px" />
+        <div class="media-body">
+          <h5 id="channel" class="mt-3"></h5>
+        </div>
       </div>
-    </div>
-    <!-- Create/Join Team Content -->
-    <div class="row row-cols-1 row-cols-md-3">
-      <div class="col mb-4">
-        <div class="card">
-          <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="card-img-top mx-auto pt-3" alt="cycloid" style="width: 64px; height: 64px" />
-          <div class="card-body">
-            <h5 class="card-title text-center">Create A Channel</h5>
-            <div class="d-flex justify-content-center py-2">
-              <span data-feather="users"></span><span data-feather="users"></span><span data-feather="users"></span>
-            </div>
-            <div class="d-flex justify-content-center pt-2 border-top">
-              <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCenter">
-                <span data-feather="tv" class="mb-1"></span> Create Channel
-              </button>
-              <!-- Modal -->
-              <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="modalCenterTitle">Create Your Team</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="form-group">
-                          <label for="recipient-name" class="col-form-label">Name</label>
-                          <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group">
-                          <label for="message-text" class="col-form-label">Description (optional)</label>
-                          <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                        <div class="form-group">
-                          <label for="recipient-name" class="col-form-label">Privacy</label>
-                          <input type="text" class="form-control" id="recipient-name" value="Public - Anyone can add members.">
-                        </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Create Channel</button>
+      <!-- Create/Join Team Content -->
+      <div class="row row-cols-1 row-cols-md-3">
+        <div class="col mb-4">
+          <div class="card">
+            <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="card-img-top mx-auto pt-3" alt="cycloid" style="width: 64px; height: 64px" />
+            <div class="card-body">
+              <h5 class="card-title text-center">Create A Channel</h5>
+              <div class="d-flex justify-content-center py-2">
+                <span data-feather="users"></span><span data-feather="users"></span><span data-feather="users"></span>
+              </div>
+              <div class="d-flex justify-content-center pt-2 border-top">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCenter">
+                  <span data-feather="tv" class="mb-1"></span> Create Channel
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalCenterTitle">Create Your Team</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Name</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                          </div>
+                          <div class="form-group">
+                            <label for="message-text" class="col-form-label">Description (optional)</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Privacy</label>
+                            <input type="text" class="form-control" id="recipient-name" value="Public - Anyone can add members.">
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Create Channel</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -60,31 +62,31 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- Channels Created -->
-      <div class="col mb-4">
-        <div class="card">
-          <div class="d-flex justify-content-center align-items-center pt-3">
-            <h2><span class="badge badge-secondary">NT</span></h2>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title text-center mb-0">Name of Team</h5>
-            <p class="card-text text-center">34 members | Public</p>
-            <div class="d-flex justify-content-center pb-2">
-              <span data-feather="user">
+        <!-- Channels Created -->
+        <div class="col mb-4">
+          <div class="card">
+            <div class="d-flex justify-content-center align-items-center pt-3">
+              <h2><span class="badge badge-secondary">NT</span></h2>
             </div>
-            <div class="d-flex justify-content-center pt-2 border-top">
-              <p class="card-text text-center">Description of the team created.</p>
-            </div>
-            <div class="d-flex justify-content-center pt-2">
-              <button type="button" class="btn btn-primary">
-                <span data-feather="user-plus" class="mb-1"></span> Join Channel
-              </button>
+            <div class="card-body">
+              <h5 class="card-title text-center mb-0">Name of Team</h5>
+              <p class="card-text text-center">34 members | Public</p>
+              <div class="d-flex justify-content-center pb-2">
+                <span data-feather="user">
+              </div>
+              <div class="d-flex justify-content-center pt-2 border-top">
+                <p class="card-text text-center">Description of the team created.</p>
+              </div>
+              <div class="d-flex justify-content-center pt-2">
+                <button type="button" class="btn btn-primary">
+                  <span data-feather="user-plus" class="mb-1"></span> Join Channel
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </span>
   </script>
   <!-- Channel List -->
   <script id="channel-list" type="text/template">
@@ -92,10 +94,10 @@
       <h5>Channel List</h5>
       <div>
         <ul id="nav" class="list-unstyled pt-2">
-          <li class="media channel-link pt-2" data-page="first">
+          <li id="channel1" class="media channel-link pt-2" data-page="first">
             <img src="https://res.cloudinary.com/dmxauzh8b/image/upload/v1531135186/cycloid.gif" class="align-self-center mr-3" alt="cycloid" style="width: 32px; height: 32px">
             <div class="media-body">
-              <a id="channel1"><h6 class="mt-0 mb-1">Channel 1</h6></a>
+              <a><h6 class="mt-0 mb-1">Channel 1</h6></a>
             </div>
           </li>
           <li class="media channel-link pt-2" data-page="second">
@@ -155,6 +157,27 @@
       </div>
     </div>
   </script>
+
+  <style>
+    #userInput {
+      margin-left: 3vw;
+      margin-bottom: 6vh;
+    }
+    #submit-msg {
+      margin-right: 3vw;
+      margin-bottom: 6vh;
+    }
+    @media (min-width: 768px) {
+      #userInput {
+        margin-left: 29vw;
+        margin-bottom: 3vh;
+      }
+      #submit-msg {
+        margin-right: 19vw;
+        margin-bottom: 3vh;
+      }
+  }
+  </style>
 {% endblock %}
 
 {% block content %}
@@ -171,11 +194,11 @@
       
     </div>
     <!-- Webchat Input Form -->
-    <form id="messenger-form" class="input-group form-width mb-3">
+    <form id="messenger-form" class="fixed-bottom input-group mb-3">
       <label class="sr-only" for="userInput">Send Messages</label>
-      <input type="text" id="userInput" class="form-control ml-md-5" autocomplete="off" autofocus>
+      <input type="text" id="userInput" class="form-control" autocomplete="off" autofocus>
       <div class="input-group-append">
-        <button id="submit-msg" class="btn btn-outline-secondary" data-user="">Send</button>
+        <button id="submit-msg" class="btn btn-outline-secondary">Send</button>
       </div>
     </form>
   </div>

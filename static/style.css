@@ -115,10 +115,6 @@ body {
     padding-bottom: 12px;
     /* Space for bottom fixed navbar */
   }
-
-  .form-width {
-    width: 75% !important;
-  }
 }
 /*
  * Navbar
